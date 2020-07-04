@@ -1,5 +1,6 @@
 const express = require("express");
 const request = require("request");
+const cors = require("cors");
 const app = express();
 const url = `http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=${process.env.API_KEY}`;
 
@@ -13,6 +14,9 @@ const fetchData = () => {
     });
   });
 };
+
+app.use(cors());
+app.options("*", cors());
 
 app.get("*", (req, res) => {
   fetchData()
